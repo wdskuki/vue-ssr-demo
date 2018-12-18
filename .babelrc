@@ -1,0 +1,14 @@
+{
+  "presets": [
+        "babel-preset-env"
+  ],
+  "plugins": [
+        "transform-runtime",
+  ],
+  "env": {
+    "test": {
+      "presets": ["env", "es2015", "stage-4"],
+      "plugins": ["istanbul"]
+    }
+  }
+}
