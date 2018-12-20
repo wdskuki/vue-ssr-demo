@@ -6,8 +6,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
   entry: ['babel-polyfill', path.join(projectRoot, 'entry/entry-client.js')],
   output: {
-    path: path.join(projectRoot, 'dist/client'),
-    filename: 'bundle.client.js',
+    path: path.join(projectRoot, 'dist'),
+    filename: 'bundle.client.js?[chunkhash]',
+    chunkFilename: 'js/[name].js?[chunkhash]',
   },
   module: {
     rules: [{

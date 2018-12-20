@@ -5,6 +5,6 @@ const app = createApp()
 
 // 绑定app根元素
 
-window.onload = function() {
+app.$router.onReady(() => {
   app.$mount('#app')
-}
+})
