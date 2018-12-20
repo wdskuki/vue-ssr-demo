@@ -2,13 +2,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const home = r => require.ensure([], () => r(require('@/modules/home')), 'home')
-const animal = r => require.ensure([], () => r(require('@/modules/animal')), 'animal')
-const people = r => require.ensure([], () => r(require('@/modules/people')), 'people')
+// const home = r => require.ensure([], () => r(require('@/modules/home')), 'home')
+// const animal = r => require.ensure([], () => r(require('@/modules/animal')), 'animal')
+// const people = r => require.ensure([], () => r(require('@/modules/people')), 'people')
 
 // const home = () => import('@/modules/home')
 // const animal = () => import('@/modules/animal')
 // const people = () => import('@/modules/people')
+
+import home from '@/modules/home'
+import animal from '@/modules/animal'
+import people from '@/modules/people'
 
 Vue.use(VueRouter)
 

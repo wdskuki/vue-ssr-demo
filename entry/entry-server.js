@@ -8,10 +8,8 @@ export default context => {
     // 更改路由
     app.$router.push(context.url)
 
-    app.$router.onReady(() => {
-      const matchedComponents = app.$router.getMatchedComponents()
-      if (!matchedComponents.length) { return reject({ code: 404 }) }
-      resolve(app)
-    }, reject)
+    const matchedComponents = app.$router.getMatchedComponents()
+    if (!matchedComponents.length) { return reject({ code: 404 }) }
+    resolve(app)
   })
 }

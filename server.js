@@ -3,9 +3,12 @@ const exp = require('express')
 const path = require('path')
 const express = exp()
 
-const { createBundleRenderer } = require('vue-server-renderer')
-const bundle = require('./dist/server/vue-ssr-server-bundle.json')
-const renderer = createBundleRenderer(bundle) // can also directly pass the absolute path string.
+// const { createBundleRenderer } = require('vue-server-renderer')
+// const bundle = require('./dist/server/vue-ssr-server-bundle.json')
+// const renderer = createBundleRenderer(bundle)
+
+const renderer = require('vue-server-renderer').createRenderer()
+const createApp = require('./dist/server/bundle.server.js')['default']
 
 // 设置静态文件目录
 express.use('/', exp.static(path.join(__dirname, '/dist')))
@@ -16,12 +19,13 @@ express.get('*', (req, res) => {
   const context = { url: req.url }
 
   // 创建vue实例，传入请求路由信息
-  renderer.renderToString(context, (err, html) => {
-    if (err) {
-      console.error(context, err, html)
-      return res.state(500).end('运行时错误')
-    }
-    res.send(`
+  createApp(context).then(app => {
+    renderer.renderToString(app, (err, html) => {
+      if (err) {
+        console.error(context, err, html)
+        return res.state(500).end('运行时错误')
+      }
+      res.send(`
     <!DOCTYPE html>
                 <html lang="en">
                     <head>
@@ -34,6 +38,7 @@ express.get('*', (req, res) => {
                     </body>
                 </html>
             `)
+    })
   })
 })
 

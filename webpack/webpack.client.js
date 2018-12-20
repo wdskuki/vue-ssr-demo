@@ -4,16 +4,10 @@ const projectRoot = path.resolve(__dirname, '..');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: path.join(projectRoot, 'entry/entry-client.js'),
+  entry: ['babel-polyfill', path.join(projectRoot, 'entry/entry-client.js')],
   output: {
     path: path.join(projectRoot, 'dist/client'),
-    filename: 'bundle.client.js?[chunkhash]',
-    chunkFilename: 'js/[name].js?[chunkhash]',
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all'
-    }
+    filename: 'bundle.client.js',
   },
   module: {
     rules: [{

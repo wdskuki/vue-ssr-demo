@@ -2,12 +2,12 @@
 const path = require('path')
 const projectRoot = path.resolve(__dirname, '..')
 let VueLoaderPlugin = require('vue-loader/lib/plugin')
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+// const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
 module.exports = {
   // 此处告知 server bundle 使用 Node 风格导出模块(Node-style exports)
   target: 'node',
-  entry: path.join(projectRoot, 'entry/entry-server.js'),
+  entry: ['babel-polyfill', path.join(projectRoot, 'entry/entry-server.js')],
   output: {
     libraryTarget: 'commonjs2',
     path: path.join(projectRoot, 'dist/server'),
@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new VueSSRServerPlugin(),
+    // new VueSSRServerPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.json', '.less', '.vue'],
