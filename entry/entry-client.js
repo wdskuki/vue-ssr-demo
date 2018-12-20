@@ -1,7 +1,6 @@
 /* entry-client.js */
-import { createApp } from '../src/main'
-
-
+// const createApp = require('@/main')
+import createApp from '@/main'
 const app = createApp()
 
 // 绑定app根元素
