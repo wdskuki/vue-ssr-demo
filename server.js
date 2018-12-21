@@ -14,6 +14,10 @@ const renderer = createBundleRenderer(bundle)
 express.use('/', exp.static(path.join(__dirname, '/dist')))
 const clientBundleFileUrl = '/bundle.client.js'
 
+express.get('/api/getHomeInfo', (req, res) => {
+  res.send('SSR发送请求')
+})
+
 // 响应路由请求
 express.get('*', (req, res) => {
   const context = { url: req.url }
@@ -24,12 +28,14 @@ express.get('*', (req, res) => {
       console.error(context, err, html)
       return res.state(500).end('运行时错误')
     }
+    let state = JSON.stringify(context.state)
     res.send(`
     <!DOCTYPE html>
                 <html lang="en">
                     <head>
                         <meta charset="UTF-8">
                         <title>Vue2.0 SSR渲染页面</title>
+                        <script>window.__INITIAL_STATE__ = ${state}</script>
                         <script src="${clientBundleFileUrl}"></script>
                     </head>
                     <body>
