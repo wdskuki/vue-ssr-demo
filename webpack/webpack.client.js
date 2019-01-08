@@ -2,7 +2,6 @@
 const path = require('path');
 const projectRoot = path.resolve(__dirname, '..');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-
 module.exports = {
   entry: ['babel-polyfill', path.join(projectRoot, 'entry/entry-client.js')],
   output: {
